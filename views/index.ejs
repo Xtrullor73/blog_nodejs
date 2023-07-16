@@ -17,16 +17,30 @@
             </div>
         </header>
         <!-- Main Content-->
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <form action="/" method="POST">
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Search</label>
+                            <input type="text" class="form-control" placeholder="Title name..."
+                                   id="title" name="title">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     <% for(let i = 0; i < blogposts.length; i++) { %>
                     <div class="post-preview">
-                        <a href="/post"></a>
+                        <a href="/post/<%= blogposts[i].id %>">
                         <h2 class="post-title">
                             <%= blogposts[i].title %>
                         </h2>
+                        </a>
                         <h3 class="post-subtitle">
                             <%= blogposts[i].body %>
                         </h3>

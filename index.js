@@ -24,6 +24,17 @@ app.get('/', async (req, res) => {
     res.render('index', {
         blogposts
     });
+    console.log(req.body)
+})
+
+app.post('/', async (req, res) => {
+    const word = req.body.title;
+    const query = new RegExp(word, 'i');
+    const blogposts = await BlogPost.find({title: query})
+
+    res.render('index', {
+        blogposts
+    });
 })
 
 app.get('/post', (req, res) => {
