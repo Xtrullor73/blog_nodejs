@@ -39,10 +39,8 @@ app.get('/post/new', (req, res) => {
     res.render('create');
 })
 
-app.post('/posts/store', (req, res) => {
-    BlogPost.create(req.body).then(r => {
-        console.log(r);
-        res.redirect('/');
-    });
+app.post('/posts/store', async (req, res) => {
+    await BlogPost.create(req.body);
+    res.redirect('/');
 })
 
