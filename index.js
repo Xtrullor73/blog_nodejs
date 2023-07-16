@@ -19,8 +19,11 @@ app.listen(3000, () => {
     console.log('hosted');
 })
 
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/', async (req, res) => {
+    const blogPosts = await BlogPost.find({});
+    res.render('index', {
+        blogPosts
+    });
 })
 
 app.get('/post', (req, res) => {
@@ -38,6 +41,7 @@ app.get('/about', (req, res) => {
 app.get('/post/new', (req, res) => {
     res.render('create');
 })
+
 
 app.post('/posts/store', async (req, res) => {
     await BlogPost.create(req.body);
