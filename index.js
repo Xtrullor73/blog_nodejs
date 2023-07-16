@@ -20,9 +20,9 @@ app.listen(3000, () => {
 })
 
 app.get('/', async (req, res) => {
-    const blogPosts = await BlogPost.find({});
+    const blogposts = await BlogPost.find({});
     res.render('index', {
-        blogPosts
+        blogposts
     });
 })
 
