@@ -24,7 +24,6 @@ app.get('/', async (req, res) => {
     res.render('index', {
         blogposts
     });
-    console.log(req.body)
 })
 
 app.post('/', async (req, res) => {
@@ -37,8 +36,18 @@ app.post('/', async (req, res) => {
     });
 })
 
-app.get('/post', (req, res) => {
-    res.render('post');
+app.post('/posts/store', async (req, res) => {
+    await BlogPost.create(req.body);
+    res.redirect('/');
+})
+
+app.get('/post:id', async (req, res) => {
+    console.log(req.params)
+    const blogpost = await BlogPost.findById(req.params.id);
+
+    res.render('post', {
+        blogpost
+    });
 })
 
 app.get('/contact', (req, res) => {
@@ -54,8 +63,5 @@ app.get('/post/new', (req, res) => {
 })
 
 
-app.post('/posts/store', async (req, res) => {
-    await BlogPost.create(req.body);
-    res.redirect('/');
-})
+
 
