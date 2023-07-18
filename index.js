@@ -19,6 +19,7 @@ app.listen(3000, () => {
     console.log('hosted');
 })
 
+// fetch all posts
 app.get('/', async (req, res) => {
     const blogposts = await BlogPost.find({});
     res.render('index', {
@@ -26,6 +27,7 @@ app.get('/', async (req, res) => {
     });
 })
 
+// search posts by title
 app.post('/', async (req, res) => {
     const word = req.body.title;
     const query = new RegExp(word, 'i');
@@ -36,18 +38,19 @@ app.post('/', async (req, res) => {
     });
 })
 
+// redirect to specific post
+app.post('/post:id', async (req, res) => {
+    const blogpost = await BlogPost.findById(req.params.id);
+    console.log(blogpost)
+    res.render('post', {
+        blogpost
+    })
+})
+
+// create post
 app.post('/posts/store', async (req, res) => {
     await BlogPost.create(req.body);
     res.redirect('/');
-})
-
-app.get('/post:id', async (req, res) => {
-    console.log(req.params)
-    const blogpost = await BlogPost.findById(req.params.id);
-
-    res.render('post', {
-        blogpost
-    });
 })
 
 app.get('/contact', (req, res) => {
