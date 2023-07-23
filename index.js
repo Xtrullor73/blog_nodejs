@@ -39,7 +39,7 @@ app.post('/', async (req, res) => {
 })
 
 // redirect to specific post
-app.post('/post:id', async (req, res) => {
+app.get('/post/:id', async (req, res) => {
     const blogpost = await BlogPost.findById(req.params.id);
     console.log(blogpost)
     res.render('post', {
@@ -64,7 +64,3 @@ app.get('/about', (req, res) => {
 app.get('/post/new', (req, res) => {
     res.render('create');
 })
-
-
-
-
