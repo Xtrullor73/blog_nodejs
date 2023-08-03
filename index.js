@@ -39,9 +39,8 @@ app.post('/', async (req, res) => {
 })
 
 // redirect to specific post
-app.get('/post/:id', async (req, res) => {
+app.post('/post/:id', async (req, res) => {
     const blogpost = await BlogPost.findById(req.params.id);
-    console.log(blogpost)
     res.render('post', {
         blogpost
     })
