@@ -17,7 +17,7 @@ app.use(express.urlencoded());
 app.use(fileUpload());
 app.use('/posts/store', validationMiddleware)
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'egit js');
 
 app.listen(3000, () => {
     console.log('hosted');
@@ -34,7 +34,3 @@ app.get('/post/:id', getPostController);
 app.get('/create', createPostController);
 app.post('/posts/store', storePostController);
 app.post('/', searchPostController);
-
-
-
-
