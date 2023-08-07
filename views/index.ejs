@@ -44,10 +44,9 @@
                         <h3 class="post-subtitle">
                             <%= blogposts[i].body %>
                         </h3>
-                        <p class="post-meta">Posted by
-                            <a href="#">Start Bootstrap</a>
-                            on September 24, 2019
-                        </p>
+                        <span class="meta">Posted by
+              <a href="#"><%= blogposts[i].username %></a>
+              on <%= blogposts[i].datePosted.toDateString() %></span>
                     </div>
                     <!-- Divider-->
                     <hr class="my-4" />

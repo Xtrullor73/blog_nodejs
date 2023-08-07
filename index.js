@@ -4,14 +4,18 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const BlogPost = require('./models/BlogPost');
+const fileUpload = require('express-fileupload')
 
 mongoose.connect('mongodb+srv://xtrullor73:Dkflbr73@cluster.uvstdm5.mongodb.net/', {useNewUrlParser: true});
 
 const app = new express();
+const validationMiddleware = require('./middleware/validation');
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(fileUpload());
+app.use('/posts/store', validationMiddleware)
 
 app.set('view engine', 'ejs');
 
@@ -19,51 +23,17 @@ app.listen(3000, () => {
     console.log('hosted');
 })
 
-// fetch all posts
-app.get('/', async (req, res) => {
-    const blogposts = await BlogPost.find({});
-    res.render('index', {
-        blogposts
-    });
-})
+const homeController = require('./controllers/home');
+const getPostController = require('./controllers/getPost');
+const createPostController = require('./controllers/createPost');
+const storePostController = require('./controllers/storePost');
+const searchPostController = require('./controllers/searchPost');
 
-// search posts by title
-app.post('/', async (req, res) => {
-    const word = req.body.title;
-    const query = new RegExp(word, 'i');
-    const blogposts = await BlogPost.find({title: query})
-
-    res.render('index', {
-        blogposts
-    });
-})
-
-// redirect to specific post
-app.post('/post:id', async (req, res) => {
-    const blogpost = await BlogPost.findById(req.params.id);
-    console.log(blogpost)
-    res.render('post', {
-        blogpost
-    })
-})
-
-// create post
-app.post('/posts/store', async (req, res) => {
-    await BlogPost.create(req.body);
-    res.redirect('/');
-})
-
-app.get('/contact', (req, res) => {
-    res.render('contact');
-})
-
-app.get('/about', (req, res) => {
-    res.render('about');
-})
-
-app.get('/post/new', (req, res) => {
-    res.render('create');
-})
+app.get('/', homeController);
+app.get('/post/:id', getPostController);
+app.get('/create', createPostController);
+app.post('/posts/store', storePostController);
+app.post('/', searchPostController);
 
 
 
