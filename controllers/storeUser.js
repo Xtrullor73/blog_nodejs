@@ -2,6 +2,10 @@ const User = require('../models/User');
 const path = require('path');
 
 module.exports = async (req, res) => {
-    await User.create(req.body);
+    try {
+        await User.create(req.body);
+    } catch (e) {
+        console.log(e);
+    }
     res.redirect('/');
 }
