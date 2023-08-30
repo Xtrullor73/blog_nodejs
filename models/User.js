@@ -7,8 +7,8 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true
-    },
-    password: {
+        },
+        password: {
         type: String,
         required: true
     }
@@ -23,6 +23,6 @@ UserSchema.pre('save', async function(next){
 
 const User = mongoose.model('User', UserSchema);
 
-User.init().then(() => console.log('Indexes have been created'));
+User.init();
 
 module.exports = User;
