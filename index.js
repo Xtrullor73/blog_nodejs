@@ -2,23 +2,26 @@ const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
-
 const mongoose = require('mongoose');
 const BlogPost = require('./models/BlogPost');
 const User = require('./models/User');
-
 const fileUpload = require('express-fileupload')
+const validationMiddleware = require('./middleware/validation');
+const authMiddleware = require('./middleware/auth');
+const expressSession = require('express-session');
 
 mongoose.connect('mongodb+srv://xtrullor73:Dkflbr73@cluster.uvstdm5.mongodb.net/', {useNewUrlParser: true});
 
 const app = new express();
-const validationMiddleware = require('./middleware/validation');
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(fileUpload());
 app.use('/posts/store', validationMiddleware)
+app.use(expressSession({
+    secret: '73forever'
+}))
 
 app.set('view engine', 'ejs');
 
@@ -38,10 +41,10 @@ const loginUserController = require('./controllers/loginUser');
 
 app.get('/', homeController);
 app.get('/post/:id', getPostController);
-app.get('/create', createPostController);
+app.get('/create', authMiddleware, createPostController);
 app.get('/auth/register', newUserController);
 app.get('/auth/login', loginController);
 app.post('/', searchPostController);
-app.post('/posts/store', storePostController);
+app.post('/posts/store', authMiddleware, storePostController);
 app.post('/users/register', storeUserController);
 app.post('/auth/login', loginUserController);
