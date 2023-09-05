@@ -4,7 +4,8 @@
     "version": "6.0.9",
     "scripts": {
         "start": "nodemon index.js",
-        "run": "nodemon index.js"
+        "run": "nodemon index.js",
+        "test": "nodemon index.js"
     },
     "description": "Clean Blog is a Medium inspired blog theme for Bootstrap.",
     "keywords": [
