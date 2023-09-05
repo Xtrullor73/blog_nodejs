@@ -44,4 +44,4 @@ app.get('/auth/login', loginController);
 app.post('/', searchPostController);
 app.post('/posts/store', storePostController);
 app.post('/users/register', storeUserController);
-// app.post()
+app.post('/auth/login', loginUserController);

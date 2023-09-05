@@ -23,6 +23,6 @@ UserSchema.pre('save', async function(next){
 
 const User = mongoose.model('User', UserSchema);
 
-User.init();
+User.init(); // unique tag won't work if DB is not init()'ed
 
 module.exports = User;
