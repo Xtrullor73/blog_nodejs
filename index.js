@@ -56,3 +56,4 @@ app.get('/auth/login', ifAuthedMiddleware, loginController);
 app.post('/users/register', ifAuthedMiddleware, storeUserController);
 app.post('/auth/login', ifAuthedMiddleware, loginUserController);
 app.get('/auth/logout', logoutController);
+app.use((req, res) => res.render('notfound'));
