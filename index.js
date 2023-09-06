@@ -8,7 +8,7 @@ const User = require('./models/User');
 const fileUpload = require('express-fileupload')
 const validationMiddleware = require('./middleware/validation');
 const authMiddleware = require('./middleware/auth');
-const ifAuthMiddleware = require('./middleware/ifAuth');
+const ifAuthedMiddleware = require('./middleware/ifAuthed');
 const expressSession = require('express-session');
 
 mongoose.connect('mongodb+srv://xtrullor73:Dkflbr73@cluster.uvstdm5.mongodb.net/', {useNewUrlParser: true});
@@ -45,7 +45,7 @@ app.get('/post/:id', getPostController);
 app.post('/', searchPostController);
 app.get('/create', authMiddleware, createPostController);
 app.post('/posts/store', authMiddleware, storePostController);
-app.get('/auth/register', ifAuthMiddleware, newUserController);
-app.get('/auth/login', ifAuthMiddleware, loginController);
-app.post('/users/register', ifAuthMiddleware, storeUserController);
-app.post('/auth/login', ifAuthMiddleware, loginUserController);
+app.get('/auth/register', ifAuthedMiddleware, newUserController);
+app.get('/auth/login', ifAuthedMiddleware, loginController);
+app.post('/users/register', ifAuthedMiddleware, storeUserController);
+app.post('/auth/login', ifAuthedMiddleware, loginUserController);
