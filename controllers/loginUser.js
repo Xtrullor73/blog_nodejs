@@ -17,6 +17,6 @@ module.exports = async (req, res) => {
         }
     } else {
         console.log('user not found');
-        res.redirect('/auth/login');
+        res.redirect('/auth/login'); 
     }
 }

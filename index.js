@@ -1,10 +1,10 @@
 const express = require('express');
-const path = require('path');
-const ejs = require('ejs');
-const bodyParser = require('body-parser');
+// const path = require('path');
+// const ejs = require('ejs');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const BlogPost = require('./models/BlogPost');
-const User = require('./models/User');
+// const BlogPost = require('./models/BlogPost');
+// const User = require('./models/User');
 const fileUpload = require('express-fileupload')
 const validationMiddleware = require('./middleware/validation');
 const authMiddleware = require('./middleware/auth');
